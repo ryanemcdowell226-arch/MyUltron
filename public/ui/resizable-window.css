@@ -1,0 +1,6 @@
+/* public/ui/resizable-window.css */
+.resizable-window { background:#0b1220; border-radius:6px; box-shadow:0 10px 40px rgba(0,0,0,0.6); overflow:hidden; color:#dbeefc; z-index:900; }
+.window-header { padding:8px 12px; background:linear-gradient(180deg,#061022,#091827); cursor:grab; user-select:none; font-weight:600; }
+.window-body { padding:12px; font-size:14px; }
+.resize-handle { width:18px; height:18px; position:absolute; right:8px; bottom:8px; cursor:nwse-resize; border-radius:4px; background:linear-gradient(135deg,#0ea5ff22,#00000022); }
+.resizable-window.dragging { opacity:0.98; }
