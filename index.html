@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U.L.T.R.O.N</title>
+<link rel="icon" href="assets/ultron-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="stage">
+  <video id="video" playsinline></video>
+  <canvas id="glCanvas"></canvas>
+
+  <!-- hand pointer cursors -->
+  <div id="handCursors"></div>
+
+  <!-- symbol's spawned tool (AI CHAT launcher) -->
+  <button id="toolCircle" class="tool-circle hidden" type="button" aria-label="AI Chat">
+    <span class="tool-icon">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H9l-4 3.5V16.5H4A1.5 1.5 0 0 1 2.5 15V7A1.5 1.5 0 0 1 4 5.5Z"/>
+        <circle cx="8" cy="11" r="0.9" fill="currentColor" stroke="none"/>
+        <circle cx="12" cy="11" r="0.9" fill="currentColor" stroke="none"/>
+        <circle cx="16" cy="11" r="0.9" fill="currentColor" stroke="none"/>
+      </svg>
+    </span>
+    <span class="tool-label">AI CHAT</span>
+  </button>
+
+  <!-- draggable windows get appended here -->
+  <div id="windowsLayer"></div>
+
+  <!-- settings -->
+  <button id="settingsBtn" aria-label="Settings">&#9881;</button>
+  <div id="settingsPanel" class="hidden">
+    <div class="settingsHeader">SETTINGS <button id="settingsClose">&times;</button></div>
+
+    <div class="settingsGroupLabel">Motion</div>
+    <label class="switchRow">Idle rotation<input type="checkbox" id="idleRotationToggle" checked><span class="switchTrack"></span></label>
+    <label class="sliderRow"><div class="sliderTop"><span>Idle rotation speed</span><span class="val" id="idleSpeedVal">1.00x</span></div>
+      <input type="range" id="idleSpeedSlider" min="0" max="3" step="0.05" value="1"></label>
+
+    <div class="settingsGroupLabel">Dots</div>
+    <label class="sliderRow"><div class="sliderTop"><span>Dot count</span><span class="val" id="dotCountVal">1.0x</span></div>
+      <input type="range" id="dotCountSlider" min="0.2" max="3" step="0.1" value="1"></label>
+    <label class="sliderRow"><div class="sliderTop"><span>Dot size</span><span class="val" id="dotSizeVal">1.0x</span></div>
+      <input type="range" id="dotSizeSlider" min="0.3" max="3" step="0.1" value="1"></label>
+    <label class="sliderRow"><div class="sliderTop"><span>Min wobble</span><span class="val" id="minWobbleVal">0.006</span></div>
+      <input type="range" id="minWobbleSlider" min="0" max="0.08" step="0.002" value="0.006"></label>
+    <label class="sliderRow"><div class="sliderTop"><span>Max wobble</span><span class="val" id="maxWobbleVal">0.020</span></div>
+      <input type="range" id="maxWobbleSlider" min="0" max="0.08" step="0.002" value="0.02"></label>
+    <label class="switchRow">Ambient dot field<input type="checkbox" id="ambientDotsToggle" checked><span class="switchTrack"></span></label>
+
+    <div class="settingsGroupLabel">Interaction</div>
+    <label class="sliderRow"><div class="sliderTop"><span>Click movement tolerance</span><span class="val" id="clickToleranceVal">14px</span></div>
+      <input type="range" id="clickToleranceSlider" min="4" max="40" step="1" value="14"></label>
+    <label class="switchRow">Two-hand pinch zoom<input type="checkbox" id="zoomToggle" checked><span class="switchTrack"></span></label>
+
+    <button class="settingsBtnAction" id="resetSymbolBtn">RESET SYMBOL</button>
+  </div>
+
+  <div id="startOverlay">
+    <img id="startLogo" src="assets/ultron-logo.png" alt="U.L.T.R.O.N">
+    <h1>U.L.T.R.O.N</h1>
+    <div class="acronym">Universal Logistic Tactical Response Operational Network</div>
+    <p>
+      Grab (fist) and move to drag the symbol around.<br>
+      Pinch and release quickly to click it &mdash; that opens the AI Chat tool.<br>
+      Pinch with both hands and move them apart or together to zoom.<br>
+      Your mouse works the same way as your hand: click, drag, type.
+    </p>
+    <button id="startBtn">ACTIVATE CAMERA</button>
+    <div id="loadingMsg">Loading tracking model&hellip;</div>
+    <div id="errorMsg"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+
+<script src="js/state.js"></script>
+<script src="js/three-scene.js"></script>
+<script src="js/symbol.js"></script>
+<script src="js/interaction.js"></script>
+<script src="js/windows.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/toolMenu.js"></script>
+<script src="js/gestures.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
